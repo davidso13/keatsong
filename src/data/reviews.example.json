@@ -1,0 +1,19 @@
+[
+  {
+    "id": "rev-pizza-1",
+    "restaurantId": "seoul-pizza-yeonnam",
+    "rating": 5,
+    "content": "The crust is genuinely chewy and the tomato sauce tastes fresh. There's a wait, but it's worth it.",
+    "authorName": "FoodieK",
+    "createdAt": "2025-04-10T12:00:00.000Z"
+  },
+  {
+    "id": "rev-pizza-2",
+    "restaurantId": "seoul-pizza-yeonnam",
+    "rating": 4,
+    "content": "Great food, but the tables are cramped. Book ahead if you can.",
+    "authorName": "WaitHunter",
+    "images": ["https://picsum.photos/seed/review/600/400"],
+    "createdAt": "2025-04-02T09:30:00.000Z"
+  }
+]

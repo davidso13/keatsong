@@ -1,0 +1,33 @@
+[
+{
+  "id": "Budaeok-mapostation",
+  "name": "Budaeok-mapostation",
+  "description": "A restaurant specializing in budae-jjigae (army base stew) and budae-jeongol, famous for its rich broth and generous portions of ham",
+  "category": "KOREAN",
+  "priceRange": "USD_10_20",
+  "address": "31, Mapo-daero 4-gil, Mapo-gu, Seoul, Republic of Korea",
+  "region": "Mapo-gu, Seoul",
+  "latitude": 37.5385,
+  "longitude": 126.9472,
+  "phone": "02-706-0330",
+  "thumbnail": "https://picsum.photos/seed/budaeok/800/600",
+  "images": [
+    "https://picsum.photos/seed/budaeok1/800/600",
+    "https://picsum.photos/seed/budaeok2/800/600"
+  ],
+  "hasParking": false,
+  "hasBreakTime": true,
+  "openingHours": {
+    "Weekday": "11:00-22:00 (break 15:00-17:00)",
+    "Saturday": "11:00-22:00",
+    "Sunday": "Closed"
+  },
+  "ratingAvg": 4.6,
+  "ratingCount": 45,
+  "createdAt": "2026-08-29T00:00:00.000Z"
+}
+
+
+
+
+]

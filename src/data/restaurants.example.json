@@ -1,0 +1,51 @@
+[
+  {
+    "id": "seoul-pizza-yeonnam",
+    "name": "Yeonnam Wood-Fired Pizza",
+    "description": "Naples-style pizzeria with a chewy wood-fired crust. The margherita is the signature.",
+    "category": "WESTERN",
+    "priceRange": "USD_10_20",
+    "address": "123 Seongmisan-ro, Mapo-gu, Seoul",
+    "region": "Yeonnam-dong, Mapo-gu, Seoul",
+    "latitude": 37.5626,
+    "longitude": 126.9255,
+    "phone": "02-000-0000",
+    "thumbnail": "https://picsum.photos/seed/pizza/800/600",
+    "images": [
+      "https://picsum.photos/seed/pizza1/800/600",
+      "https://picsum.photos/seed/pizza2/800/600"
+    ],
+    "hasParking": false,
+    "hasBreakTime": true,
+    "openingHours": {
+      "Weekday": "11:30-15:00, 17:00-21:30",
+      "Weekend": "11:30-21:30",
+      "Monday": "Closed"
+    },
+    "nearestStation": {
+      "name": "Hongik Univ.",
+      "line": "Line 2",
+      "exit": "Exit 3",
+      "walkMinutes": 8
+    },
+    "ratingAvg": 4.5,
+    "ratingCount": 12,
+    "createdAt": "2025-03-01T00:00:00.000Z"
+  },
+  {
+    "id": "gangnam-gukbap",
+    "name": "Gangnam Sundae Gukbap",
+    "description": "24-hour pork-and-rice soup house. Stir in the seasoning paste for a spicier bowl.",
+    "category": "KOREAN",
+    "priceRange": "UNDER_10",
+    "address": "1 Teheran-ro, Gangnam-gu, Seoul",
+    "region": "Yeoksam-dong, Gangnam-gu, Seoul",
+    "latitude": 37.5006,
+    "longitude": 127.0366,
+    "hasParking": false,
+    "hasBreakTime": false,
+    "ratingAvg": 4.2,
+    "ratingCount": 87,
+    "nearestStation": { "name": "Yeoksam", "line": "Line 2", "walkMinutes": 3 }
+  }
+]

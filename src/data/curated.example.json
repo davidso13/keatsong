@@ -1,0 +1,15 @@
+[
+  {
+    "id": "list-rainy-day",
+    "slug": "rainy-day",
+    "title": "For a rainy day",
+    "description": "Warm broths and wood-fired kitchens for when the rain won't let up.",
+    "theme": "Rainy day",
+    "coverImage": "https://picsum.photos/seed/rainy/1200/675",
+    "createdAt": "2025-05-01T00:00:00.000Z",
+    "items": [
+      { "restaurantId": "gangnam-gukbap", "comment": "Open 24 hours — never a bad time." },
+      { "restaurantId": "seoul-pizza-yeonnam", "comment": "Grab the seat next to the oven." }
+    ]
+  }
+]

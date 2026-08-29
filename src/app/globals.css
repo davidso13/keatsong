@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/*
+ * `dark:` utilities only apply under an explicit `.dark` ancestor.
+ * KeatSong ships a single committed light palette — dark sections are a
+ * deliberate design choice (see `.section-night`), not an OS-driven theme.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Surfaces */
+  --color-canvas: #f3f1ea;
+  --color-surface: #ffffff;
+  --color-line: #e4e0d4;
+
+  /* Ink */
+  --color-ink: #121212;
+  --color-ink-soft: #56554e;
+  --color-ink-faint: #8b897f;
+
+  /* Accent */
+  --color-cobalt: #2b3ff0;
+  --color-cobalt-hover: #2032ce;
+
+  /* Night sections */
+  --color-night: #0e0e10;
+  --color-night-soft: #191920;
+  --color-night-line: #2a2a31;
+}
+
+:root {
+  --background: var(--color-canvas);
+  --foreground: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Mono uppercase micro-label used as section eyebrows */
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+
+/* Tight display headings */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+/* Dark full-bleed feature block */
+.section-night {
+  background: var(--color-night);
+  color: #f3f1ea;
+}
+
+/* Dotted texture for the cobalt footer panel */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px);
+  background-size: 22px 22px;
+}

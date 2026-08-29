@@ -1,0 +1,173 @@
+// TastyMap Prisma schema
+// docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Auth.js (NextAuth v5) 모델
+// ---------------------------------------------------------------------------
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  reviews       Review[]
+  bookmarks     Bookmark[]
+  curatedLists  CuratedList[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// 도메인 모델
+// ---------------------------------------------------------------------------
+enum FoodCategory {
+  KOREAN
+  JAPANESE
+  CHINESE
+  WESTERN
+  ASIAN
+  CAFE
+  BAR
+  DESSERT
+  ETC
+}
+
+enum PriceRange {
+  UNDER_10 // under $10 / person
+  USD_10_20 // $10–20
+  USD_20_30 // $20–30
+  USD_30_50 // $30–50
+  USD_50_70 // $50–70
+  USD_70_100 // $70–100
+  OVER_100 // $100+
+}
+
+model Restaurant {
+  id          String       @id @default(cuid())
+  name        String
+  description String       @db.Text
+  category    FoodCategory
+  priceRange  PriceRange
+  address     String
+  region      String // "서울 강남구 역삼동" 형태
+  latitude    Float // WGS84
+  longitude   Float // WGS84
+  phone       String?
+  thumbnail   String?
+  images      String[]
+  hasParking  Boolean      @default(false)
+  hasBreakTime Boolean     @default(false)
+  openingHours Json? // { mon: "11:00-22:00", ... }
+  nearestStation Json? // { name: "강남역", line: "2호선", exit: "5번 출구", walkMinutes: 5 }
+  ratingAvg   Float        @default(0)
+  ratingCount Int          @default(0)
+  reviews     Review[]
+  bookmarks   Bookmark[]
+  curatedItems CuratedItem[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([category])
+  @@index([region])
+  @@index([latitude, longitude])
+}
+
+model Review {
+  id           String     @id @default(cuid())
+  rating       Int // 1 ~ 5
+  content      String     @db.Text
+  images       String[]
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  authorId     String
+  author       User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([restaurantId, authorId])
+  @@index([restaurantId])
+}
+
+model Bookmark {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  restaurantId String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+
+  @@unique([userId, restaurantId])
+}
+
+model CuratedList {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  title       String
+  description String        @db.Text
+  coverImage  String?
+  theme       String // "비 오는 날", "혼밥 맛집" 등
+  authorId    String?
+  author      User?         @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  items       CuratedItem[]
+  isPublished Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model CuratedItem {
+  id            String      @id @default(cuid())
+  listId        String
+  list          CuratedList @relation(fields: [listId], references: [id], onDelete: Cascade)
+  restaurantId  String
+  restaurant    Restaurant  @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  order         Int         @default(0)
+  comment       String?     @db.Text
+
+  @@unique([listId, restaurantId])
+  @@index([listId])
+}
