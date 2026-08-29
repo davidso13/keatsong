@@ -10,10 +10,9 @@
   "latitude": 37.5385,
   "longitude": 126.9472,
   "phone": "02-706-0330",
-  "thumbnail": "https://picsum.photos/seed/budaeok/800/600",
+  "thumbnail": "/images/001_부대옥.jpg",
   "images": [
-    "https://picsum.photos/seed/budaeok1/800/600",
-    "https://picsum.photos/seed/budaeok2/800/600"
+    "/images/001_부대옥.jpg"
   ],
   "hasParking": false,
   "hasBreakTime": true,
@@ -37,10 +36,9 @@
   "latitude": 37.5621,
   "longitude": 126.8365,
   "phone": "02-6956-1133",
-  "thumbnail": "https://picsum.photos/seed/illilmimi/800/600",
+  "thumbnail": "/images/002_일일미미.jpg",
   "images": [
-    "https://picsum.photos/seed/illilmimi1/800/600",
-    "https://picsum.photos/seed/illilmimi2/800/600"
+    "/images/002_일일미미.jpg"
   ],
   "hasParking": true,
   "hasBreakTime": true,

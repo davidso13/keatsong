@@ -21,6 +21,13 @@ import curatedJson from "./curated.json";
 
 const DEFAULT_CREATED_AT = "2025-01-01T00:00:00.000Z";
 
+/**
+ * An image reference: either an absolute URL (external host — must be registered in
+ * next.config.ts `images.remotePatterns`) or a site-root-relative path served from
+ * `public/`, e.g. "/images/001_부대옥.jpg".
+ */
+const imageRef = z.union([z.string().url(), z.string().startsWith("/")]);
+
 export const restaurantInputSchema = z.object({
   /** 고유 식별자. 영문/숫자/하이픈 권장. URL 에 그대로 쓰입니다: /restaurants/<id> */
   id: z.string().min(1),
@@ -42,10 +49,10 @@ export const restaurantInputSchema = z.object({
   longitude: z.number().min(-180).max(180),
   /** 전화번호 (선택) */
   phone: z.string().nullish(),
-  /** 대표 이미지 URL (선택). next.config.ts 의 images.remotePatterns 에 도메인 등록 필요 */
-  thumbnail: z.string().url().nullish(),
-  /** 추가 이미지 URL 목록 (선택) */
-  images: z.array(z.string().url()).default([]),
+  /** 대표 이미지 (선택). 절대 URL 또는 public/ 기준 경로("/images/foo.jpg") */
+  thumbnail: imageRef.nullish(),
+  /** 추가 이미지 목록 (선택). 절대 URL 또는 public/ 기준 경로 */
+  images: z.array(imageRef).default([]),
   /** 주차 가능 여부 */
   hasParking: z.boolean().default(false),
   /** 브레이크타임 존재 여부 */
