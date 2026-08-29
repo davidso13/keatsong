@@ -25,7 +25,35 @@
   "ratingAvg": 4.6,
   "ratingCount": 45,
   "createdAt": "2026-08-29T00:00:00.000Z"
+},
+{
+  "id": "seoul-chinese-illilmimi-magok",
+  "name": "Illilmimi Magok K-Square Branch",
+  "description": "A modern Chinese restaurant located in K-Square Magok, offering neat Chinese cuisine, dim sum, and specialty dishes",
+  "category": "CHINESE",
+  "priceRange": "USD_20_30",
+  "address": "105-7, Magokjungang-ro, Gangseo-gu, Seoul, Republic of Korea",
+  "region": "Magok, Gangseo-gu, Seoul",
+  "latitude": 37.5621,
+  "longitude": 126.8365,
+  "phone": "02-6956-1133",
+  "thumbnail": "https://picsum.photos/seed/illilmimi/800/600",
+  "images": [
+    "https://picsum.photos/seed/illilmimi1/800/600",
+    "https://picsum.photos/seed/illilmimi2/800/600"
+  ],
+  "hasParking": true,
+  "hasBreakTime": true,
+  "openingHours": {
+    "Weekday": "11:00-15:00, 17:00-21:30",
+    "Saturday": "11:30-21:00",
+    "Sunday": "Closed"
+  },
+  "ratingAvg": 4.6,
+  "ratingCount": 48,
+  "createdAt": "2026-08-29T00:00:00.000Z"
 }
+
 
 
 
