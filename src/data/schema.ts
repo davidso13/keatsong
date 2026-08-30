@@ -24,7 +24,7 @@ const DEFAULT_CREATED_AT = "2025-01-01T00:00:00.000Z";
 /**
  * An image reference: either an absolute URL (external host — must be registered in
  * next.config.ts `images.remotePatterns`) or a site-root-relative path served from
- * `public/`, e.g. "/images/001_부대옥.jpg".
+ * `public/`, e.g. "/images/001_Budaeok_mapostation.jpg".
  */
 const imageRef = z.union([z.string().url(), z.string().startsWith("/")]);
 

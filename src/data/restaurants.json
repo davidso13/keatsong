@@ -10,9 +10,9 @@
   "latitude": 37.5385,
   "longitude": 126.9472,
   "phone": "02-706-0330",
-  "thumbnail": "/images/001_부대옥.jpg",
+  "thumbnail": "/images/001_Budaeok_mapostation.jpg",
   "images": [
-    "/images/001_부대옥.jpg"
+    "/images/001_Budaeok_mapostation.jpg"
   ],
   "hasParking": false,
   "hasBreakTime": true,
@@ -36,9 +36,9 @@
   "latitude": 37.5621,
   "longitude": 126.8365,
   "phone": "02-6956-1133",
-  "thumbnail": "/images/002_일일미미.jpg",
+  "thumbnail": "/images/002_seoul_chinese-illilmimi_magok.jpg",
   "images": [
-    "/images/002_일일미미.jpg"
+    "/images/002_seoul_chinese-illilmimi_magok.jpg"
   ],
   "hasParking": true,
   "hasBreakTime": true,
