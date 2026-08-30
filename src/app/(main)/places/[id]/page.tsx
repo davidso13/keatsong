@@ -11,6 +11,8 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return (await getAllPlaceIds()).map((id) => ({ id }));
 }

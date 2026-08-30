@@ -197,3 +197,46 @@ model PostComment {
 
   @@index([postId])
 }
+
+// ---------------------------------------------------------------------------
+// Things to do — 페스티벌 / 체험 / 액티비티
+// ---------------------------------------------------------------------------
+model Activity {
+  id          String   @id @default(cuid())
+  name        String
+  description String   @db.Text
+  category    String // "Festival", "Workshop", "Tour" 등 자유 문자열
+  region      String
+  schedule    String   @default("")
+  price       String?
+  thumbnail   String?
+  images      String[]
+  link        String?
+  latitude    Float?
+  longitude   Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
+}
+
+// ---------------------------------------------------------------------------
+// Places — 방문해볼 만한 장소
+// ---------------------------------------------------------------------------
+model Place {
+  id          String   @id @default(cuid())
+  name        String
+  description String   @db.Text
+  category    String // "Landmark", "Park", "Museum" 등 자유 문자열
+  region      String
+  address     String?
+  bestTime    String?
+  thumbnail   String?
+  images      String[]
+  latitude    Float?
+  longitude   Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
+}

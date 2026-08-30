@@ -1,8 +1,11 @@
 import "server-only";
 
+import { z } from "zod";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
-import { getLocalReviews, LOCAL_RESTAURANTS } from "@/data/schema";
+import { getLocalReviews, LOCAL_RESTAURANTS, restaurantInputSchema } from "@/data/schema";
+import { readDataFile, slugId, writeDataFile } from "@/data/store";
 import { getDistanceInMeters } from "@/utils/geo";
+import type { RestaurantFormValues } from "@/lib/schemas/content";
 import type { RestaurantQuery } from "@/lib/schemas/restaurant";
 import type {
   Coordinates,
@@ -12,6 +15,8 @@ import type {
   RestaurantWithReviews,
 } from "@/types";
 
+const RESTAURANTS_FILE = "restaurants.json";
+
 function withDistance(list: Restaurant[], origin?: Coordinates) {
   if (!origin) return list.map((r) => ({ ...r, distance: null as number | null }));
   return list.map((r) => ({
@@ -20,9 +25,9 @@ function withDistance(list: Restaurant[], origin?: Coordinates) {
   }));
 }
 
-function filterLocal(query: RestaurantQuery) {
+function filterLocal(list: Restaurant[], query: RestaurantQuery) {
   const keyword = query.q?.toLowerCase();
-  return LOCAL_RESTAURANTS.filter((r) => {
+  return list.filter((r) => {
     if (keyword && !`${r.name}${r.description}${r.region}`.toLowerCase().includes(keyword)) {
       return false;
     }
@@ -45,7 +50,7 @@ export async function getRestaurants(
       : undefined;
 
   if (!isDatabaseConfigured) {
-    let items = withDistance(filterLocal(query), origin);
+    let items = withDistance(filterLocal(await readLiveRestaurants(), query), origin);
     items = sortRestaurants(items, query.sort);
 
     const total = items.length;
@@ -117,7 +122,7 @@ export async function getRestaurantById(
   origin?: Coordinates,
 ): Promise<RestaurantWithReviews | null> {
   if (!isDatabaseConfigured) {
-    const found = LOCAL_RESTAURANTS.find((r) => r.id === id);
+    const found = (await readLiveRestaurants()).find((r) => r.id === id);
     if (!found) return null;
     return {
       ...found,
@@ -193,6 +198,136 @@ function serializeRestaurant(row: {
     createdAt: row.createdAt.toISOString(),
     updatedAt: row.updatedAt.toISOString(),
   };
+}
+
+/* ------------------------------------------------------------------ *
+ *  Admin — create / delete
+ * ------------------------------------------------------------------ */
+
+/** Simplified list row for the admin table. */
+export interface RestaurantAdminRow {
+  id: string;
+  name: string;
+  category: Restaurant["category"];
+  region: string;
+  createdAt: string;
+}
+
+export async function getRestaurantAdminRows(): Promise<RestaurantAdminRow[]> {
+  if (!isDatabaseConfigured) {
+    const list = await readLiveRestaurants();
+    return [...list]
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+      .map((r) => ({
+        id: r.id,
+        name: r.name,
+        category: r.category,
+        region: r.region,
+        createdAt: r.createdAt,
+      }));
+  }
+  const rows = await prisma.restaurant.findMany({
+    orderBy: { createdAt: "desc" },
+    select: { id: true, name: true, category: true, region: true, createdAt: true },
+  });
+  return rows.map((r) => ({ ...r, createdAt: r.createdAt.toISOString() }));
+}
+
+async function readLiveRestaurants(): Promise<Restaurant[]> {
+  const parsed = z
+    .array(restaurantInputSchema)
+    .safeParse(await readDataFile<unknown>(RESTAURANTS_FILE, null));
+  if (!parsed.success) return LOCAL_RESTAURANTS;
+  return parsed.data.map((r) => ({
+    id: r.id,
+    name: r.name,
+    description: r.description,
+    category: r.category,
+    priceRange: r.priceRange,
+    address: r.address,
+    region: r.region,
+    latitude: r.latitude,
+    longitude: r.longitude,
+    phone: r.phone ?? null,
+    thumbnail: r.thumbnail ?? null,
+    images: r.images,
+    hasParking: r.hasParking,
+    hasBreakTime: r.hasBreakTime,
+    openingHours: r.openingHours ?? null,
+    nearestStation: r.nearestStation
+      ? {
+          name: r.nearestStation.name,
+          line: r.nearestStation.line ?? null,
+          exit: r.nearestStation.exit ?? null,
+          walkMinutes: r.nearestStation.walkMinutes ?? null,
+        }
+      : null,
+    ratingAvg: r.ratingAvg,
+    ratingCount: r.ratingCount,
+    createdAt: r.createdAt,
+    updatedAt: r.createdAt,
+  }));
+}
+
+export async function createRestaurant(input: RestaurantFormValues): Promise<{ id: string }> {
+  if (!isDatabaseConfigured) {
+    const raw = await readDataFile<unknown[]>(RESTAURANTS_FILE, []);
+    const list = Array.isArray(raw) ? raw : [];
+    const entry = {
+      id: slugId(input.name),
+      name: input.name,
+      description: input.description,
+      category: input.category,
+      priceRange: input.priceRange,
+      address: input.address,
+      region: input.region,
+      latitude: input.latitude,
+      longitude: input.longitude,
+      phone: input.phone,
+      thumbnail: input.thumbnail,
+      images: input.images,
+      hasParking: input.hasParking,
+      hasBreakTime: input.hasBreakTime,
+      ratingAvg: 0,
+      ratingCount: 0,
+      createdAt: new Date().toISOString(),
+    };
+    await writeDataFile(RESTAURANTS_FILE, [entry, ...list]);
+    return { id: entry.id };
+  }
+
+  const row = await prisma.restaurant.create({
+    data: {
+      name: input.name,
+      description: input.description,
+      category: input.category,
+      priceRange: input.priceRange,
+      address: input.address,
+      region: input.region,
+      latitude: input.latitude,
+      longitude: input.longitude,
+      phone: input.phone,
+      thumbnail: input.thumbnail,
+      images: input.images,
+      hasParking: input.hasParking,
+      hasBreakTime: input.hasBreakTime,
+    },
+    select: { id: true },
+  });
+  return row;
+}
+
+export async function deleteRestaurant(id: string): Promise<boolean> {
+  if (!isDatabaseConfigured) {
+    const raw = await readDataFile<Array<{ id: string }>>(RESTAURANTS_FILE, []);
+    const list = Array.isArray(raw) ? raw : [];
+    const next = list.filter((r) => r.id !== id);
+    if (next.length === list.length) return false;
+    await writeDataFile(RESTAURANTS_FILE, next);
+    return true;
+  }
+  const deleted = await prisma.restaurant.deleteMany({ where: { id } });
+  return deleted.count > 0;
 }
 
 export type { RestaurantWithDistance };

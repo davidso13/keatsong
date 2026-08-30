@@ -5,7 +5,6 @@ import { Car, Clock, MapPin, Phone, TrainFront } from "lucide-react";
 import { Badge } from "@/components/ui";
 import { RatingBadge } from "@/components/restaurant/RatingBadge";
 import { ReviewList } from "@/components/restaurant/ReviewList";
-import { MapView } from "@/components/restaurant/MapView";
 import { getAllRestaurantIds, getRestaurantById } from "@/services/restaurants";
 import { FOOD_CATEGORY_LABEL } from "@/lib/constants";
 import { formatNearestStation, formatPriceRange } from "@/utils/format";
@@ -13,6 +12,8 @@ import { formatNearestStation, formatPriceRange } from "@/utils/format";
 interface PageProps {
   params: Promise<{ id: string }>;
 }
+
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   const ids = await getAllRestaurantIds();
@@ -50,15 +51,26 @@ export default async function RestaurantDetailPage({ params }: PageProps) {
       )}
 
       <header className="mt-7">
-        <div className="flex flex-wrap items-center gap-2">
-          <Badge variant="accent">{FOOD_CATEGORY_LABEL[restaurant.category]}</Badge>
-          <Badge variant="outline">{formatPriceRange(restaurant.priceRange)}</Badge>
-        </div>
-        <h1 className="display mt-4 text-4xl">{restaurant.name}</h1>
+        <h1 className="display text-4xl">{restaurant.name}</h1>
         <div className="mt-3">
           <RatingBadge rating={restaurant.ratingAvg} count={restaurant.ratingCount} />
         </div>
         <p className="mt-4 text-ink-soft">{restaurant.description}</p>
+
+        <dl className="mt-6 flex flex-wrap gap-x-10 gap-y-4">
+          <div>
+            <dt className="eyebrow text-ink-faint">Type</dt>
+            <dd className="mt-1.5">
+              <Badge variant="accent">{FOOD_CATEGORY_LABEL[restaurant.category]}</Badge>
+            </dd>
+          </div>
+          <div>
+            <dt className="eyebrow text-ink-faint">Price</dt>
+            <dd className="mt-1.5">
+              <Badge variant="outline">{formatPriceRange(restaurant.priceRange)}</Badge>
+            </dd>
+          </div>
+        </dl>
       </header>
 
       <dl className="mt-7 space-y-2 rounded-2xl border border-line bg-surface p-5 text-sm">
@@ -89,22 +101,6 @@ export default async function RestaurantDetailPage({ params }: PageProps) {
           </span>
         </div>
       </dl>
-
-      <section className="mt-9">
-        <h2 className="mb-3 font-display text-lg font-semibold">Location</h2>
-        <MapView
-          center={{ latitude: restaurant.latitude, longitude: restaurant.longitude }}
-          markers={[
-            {
-              id: restaurant.id,
-              latitude: restaurant.latitude,
-              longitude: restaurant.longitude,
-              label: restaurant.name,
-            },
-          ]}
-          level={3}
-        />
-      </section>
 
       <section className="mt-12">
         <h2 className="font-display text-lg font-semibold">

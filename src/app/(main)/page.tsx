@@ -7,6 +7,9 @@ import { getBanners } from "@/services/banners";
 import { getRestaurants } from "@/services/restaurants";
 import { restaurantQuerySchema } from "@/lib/schemas/restaurant";
 
+// Banners and the top-rated list are admin-editable, so render fresh each request.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const [banners, { items: topRestaurants }] = await Promise.all([
     getBanners(),

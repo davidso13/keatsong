@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: "Festivals, workshops and experiences worth planning a trip around.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function ThingsToDoPage() {
   const activities = await getActivities();
 
