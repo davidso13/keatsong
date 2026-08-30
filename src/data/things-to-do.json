@@ -1,0 +1,54 @@
+[
+  {
+    "id": "seoul-lantern-festival",
+    "name": "Seoul Lantern Festival",
+    "description": "Every autumn the Cheonggyecheon stream fills with hundreds of illuminated lanterns, from folk-tale figures to giant koi. Walk the 1.2 km route after sunset for the full effect, then grab hotteok from the Gwangjang Market stalls a few minutes away.",
+    "category": "Festival",
+    "region": "Jung-gu, Seoul",
+    "schedule": "Early November, nightly 17:00–23:00",
+    "price": "Free",
+    "thumbnail": "https://picsum.photos/seed/keatsong-lantern/1200/800",
+    "images": [
+      "https://picsum.photos/seed/keatsong-lantern/1200/800",
+      "https://picsum.photos/seed/keatsong-lantern-2/1200/800"
+    ],
+    "link": "https://english.visitseoul.net",
+    "latitude": 37.5693,
+    "longitude": 126.9784,
+    "createdAt": "2026-08-01T00:00:00.000Z"
+  },
+  {
+    "id": "icheon-ceramics-workshop",
+    "name": "Icheon Ceramics Hands-on Workshop",
+    "description": "Icheon has been a pottery town for six centuries. Drop-in studios near the Ceramics Village let you throw a bowl on the wheel or hand-paint a celadon cup; finished pieces are fired and shipped to your hotel about a week later.",
+    "category": "Workshop",
+    "region": "Icheon, Gyeonggi-do",
+    "schedule": "Year-round, 10:00–17:00 (closed Mondays)",
+    "price": "From $25",
+    "thumbnail": "https://picsum.photos/seed/keatsong-ceramics/1200/800",
+    "images": [
+      "https://picsum.photos/seed/keatsong-ceramics/1200/800"
+    ],
+    "link": null,
+    "latitude": 37.2792,
+    "longitude": 127.4425,
+    "createdAt": "2026-07-15T00:00:00.000Z"
+  },
+  {
+    "id": "busan-night-market-tour",
+    "name": "Busan Night Market Food Tour",
+    "description": "A guided three-hour walk through BIFF Square and Bupyeong Kkangtong Market, tasting ssiat hotteok, eomuk skewers, and fresh-off-the-boat hoe. Small groups, English-speaking guide, and enough food that dinner afterwards is optional.",
+    "category": "Tour",
+    "region": "Jung-gu, Busan",
+    "schedule": "Wed–Sun, tours start 18:30",
+    "price": "From $45",
+    "thumbnail": "https://picsum.photos/seed/keatsong-busan-market/1200/800",
+    "images": [
+      "https://picsum.photos/seed/keatsong-busan-market/1200/800"
+    ],
+    "link": null,
+    "latitude": 35.0989,
+    "longitude": 129.0286,
+    "createdAt": "2026-06-20T00:00:00.000Z"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "image": "https://picsum.photos/seed/keatsong-banner-1/1600/640",
+    "href": "/restaurants",
+    "title": "Every great meal, on the map",
+    "subtitle": "Curated restaurants across Korea, rated on the food alone"
+  },
+  {
+    "image": "https://picsum.photos/seed/keatsong-banner-2/1600/640",
+    "href": "/things-to-do",
+    "title": "Festivals & experiences",
+    "subtitle": "What to do this season, from lantern nights to pottery studios"
+  },
+  {
+    "image": "https://picsum.photos/seed/keatsong-banner-3/1600/640",
+    "href": "/places",
+    "title": "Places worth the detour",
+    "subtitle": "Landmarks, parks and neighbourhoods locals actually love"
+  },
+  {
+    "image": "https://picsum.photos/seed/keatsong-banner-4/1600/640",
+    "href": "/moments",
+    "title": "Share your moments",
+    "subtitle": "Post your finds and swap tips with other travelers"
+  },
+  {
+    "image": "https://picsum.photos/seed/keatsong-banner-5/1600/640",
+    "href": "/restaurants?sort=rating",
+    "title": "Highest rated this week",
+    "subtitle": "See where the ratings are climbing right now"
+  }
+]

@@ -171,3 +171,29 @@ model CuratedItem {
   @@unique([listId, restaurantId])
   @@index([listId])
 }
+
+// ---------------------------------------------------------------------------
+// Share moments — 사용자 게시판 (글 + 댓글). 로그인 없이 닉네임으로 작성.
+// ---------------------------------------------------------------------------
+model Post {
+  id        String        @id @default(cuid())
+  nickname  String
+  title     String
+  body      String        @db.Text
+  comments  PostComment[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([createdAt])
+}
+
+model PostComment {
+  id        String   @id @default(cuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  nickname  String
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([postId])
+}

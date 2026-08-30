@@ -112,3 +112,77 @@ export interface Paginated<T> {
   total: number;
   hasNext: boolean;
 }
+
+/** 홈 상단 롤링 배너 (src/data/banners.json 로 관리) */
+export interface Banner {
+  /** 배너 이미지: 절대 URL 또는 public/ 기준 경로 */
+  image: string;
+  /** 클릭 시 이동할 랜딩 URL (내부 경로 "/..." 또는 외부 "https://...") */
+  href: string;
+  /** 배너 제목 (이미지 위 오버레이 + 대체 텍스트) */
+  title: string;
+  /** 부제 (선택) */
+  subtitle: string | null;
+}
+
+/** Things to do — 페스티벌 / 체험 / 액티비티 */
+export interface Activity {
+  id: string;
+  name: string;
+  description: string;
+  /** 분류 라벨. 예: "Festival", "Workshop", "Tour" */
+  category: string;
+  region: string;
+  /** 자유 형식 일정 문구. 예: "May 3–5, 2026" 또는 "Year-round" */
+  schedule: string;
+  /** 입장료/참가비 문구. 예: "Free", "From $20" */
+  price: string | null;
+  thumbnail: string | null;
+  images: string[];
+  /** 외부 예약/공식 링크 (선택) */
+  link: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  createdAt: string;
+}
+
+/** Places — 방문해볼 만한 장소 */
+export interface Place {
+  id: string;
+  name: string;
+  description: string;
+  /** 분류 라벨. 예: "Landmark", "Park", "Museum", "Neighbourhood" */
+  category: string;
+  region: string;
+  address: string | null;
+  /** 추천 방문 시간대/팁 (선택) */
+  bestTime: string | null;
+  thumbnail: string | null;
+  images: string[];
+  latitude: number | null;
+  longitude: number | null;
+  createdAt: string;
+}
+
+/** Share moments — 게시판 댓글 */
+export interface PostComment {
+  id: string;
+  postId: string;
+  nickname: string;
+  body: string;
+  createdAt: string;
+}
+
+/** Share moments — 게시글 */
+export interface Post {
+  id: string;
+  nickname: string;
+  title: string;
+  body: string;
+  commentCount: number;
+  createdAt: string;
+}
+
+export interface PostDetail extends Post {
+  comments: PostComment[];
+}

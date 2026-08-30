@@ -1,0 +1,38 @@
+[
+  {
+    "id": "seed-post-1",
+    "nickname": "trip_in_seoul",
+    "title": "Best budae-jjigae near Mapo?",
+    "body": "Just had lunch at Budaeok by Mapo station and it might be the best army stew I've had in Seoul. The broth is unreal. Anywhere else I should try before I fly out on Friday?",
+    "createdAt": "2026-08-27T02:30:00.000Z",
+    "comments": [
+      {
+        "id": "seed-comment-1",
+        "nickname": "hungry_kim",
+        "body": "Try the one in Uijeongbu if you have a spare morning — that's where the dish is from.",
+        "createdAt": "2026-08-27T05:10:00.000Z"
+      },
+      {
+        "id": "seed-comment-2",
+        "nickname": "trip_in_seoul",
+        "body": "Oh nice, I didn't know that. Adding it to the list, thanks!",
+        "createdAt": "2026-08-27T06:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "id": "seed-post-2",
+    "nickname": "gimbap_forever",
+    "title": "Lantern festival — worth it on a weekday?",
+    "body": "Heading to Seoul in early November and the Lantern Festival lines up with my dates. Is it insanely crowded, or is a weekday evening manageable?",
+    "createdAt": "2026-08-25T11:45:00.000Z",
+    "comments": [
+      {
+        "id": "seed-comment-3",
+        "nickname": "seoul_local_92",
+        "body": "Go right at 5pm when it opens. By 7 the Cheonggyecheon path is shoulder to shoulder even midweek.",
+        "createdAt": "2026-08-25T13:20:00.000Z"
+      }
+    ]
+  }
+]

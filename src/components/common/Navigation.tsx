@@ -7,7 +7,9 @@ import { cn } from "@/lib/utils";
 const LINKS = [
   { href: "/", label: "Home" },
   { href: "/restaurants", label: "Restaurants" },
-  { href: "/curated", label: "Collections" },
+  { href: "/things-to-do", label: "Things to do" },
+  { href: "/places", label: "Places" },
+  { href: "/moments", label: "Share moments" },
 ];
 
 export function Navigation() {
