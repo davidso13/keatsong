@@ -4,6 +4,7 @@ import {
   LOCAL_RESTAURANTS,
   getLocalReviews,
 } from "../src/data/schema";
+import { LOCAL_ACTIVITIES, LOCAL_PLACES } from "../src/data/content";
 
 const prisma = new PrismaClient();
 
@@ -81,8 +82,50 @@ async function main() {
     });
   }
 
+  for (const a of LOCAL_ACTIVITIES) {
+    await prisma.activity.upsert({
+      where: { id: a.id },
+      update: {},
+      create: {
+        id: a.id,
+        name: a.name,
+        description: a.description,
+        category: a.category,
+        region: a.region,
+        schedule: a.schedule,
+        price: a.price,
+        thumbnail: a.thumbnail,
+        images: a.images,
+        link: a.link,
+        latitude: a.latitude,
+        longitude: a.longitude,
+      },
+    });
+  }
+
+  for (const p of LOCAL_PLACES) {
+    await prisma.place.upsert({
+      where: { id: p.id },
+      update: {},
+      create: {
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        category: p.category,
+        region: p.region,
+        address: p.address,
+        bestTime: p.bestTime,
+        thumbnail: p.thumbnail,
+        images: p.images,
+        latitude: p.latitude,
+        longitude: p.longitude,
+      },
+    });
+  }
+
   console.log(
-    `✅ Done — ${LOCAL_RESTAURANTS.length} restaurants, ${LOCAL_CURATED_LISTS.length} curated lists`,
+    `✅ Done — ${LOCAL_RESTAURANTS.length} restaurants, ${LOCAL_CURATED_LISTS.length} curated lists, ` +
+      `${LOCAL_ACTIVITIES.length} activities, ${LOCAL_PLACES.length} places`,
   );
 }
 
