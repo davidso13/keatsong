@@ -1,15 +1,15 @@
 [
   {
-    "image": "https://picsum.photos/seed/KeatSong-banner-1/1600/640",
-    "href": "/restaurants",
-    "title": "Every great meal, on the map",
-    "subtitle": "Curated restaurants across Korea, rated on the food alone"
+    "image": "/images/001_Budaeok_mapostation.jpg",
+    "href": "/restaurants/Budaeok-mapostation",
+    "title": "Budaeok_mapostation",
+    "subtitle": "A restaurant specializing in budae-jjigae (army base stew) and budae-jeongol, famous for its rich broth and generous portions of ham"
   },
   {
-    "image": "https://picsum.photos/seed/KeatSong-banner-2/1600/640",
-    "href": "/things-to-do",
-    "title": "Festivals & experiences",
-    "subtitle": "What to do this season, from lantern nights to pottery studios"
+    "image": "/images/002_Ilil_Mimi_Magok_K-Square_Branch.jpg",
+    "href": "/restaurants/seoul-chinese-illilmimi-magok",
+    "title": "Illilmimi Magok K-Square Branch",
+    "subtitle": "A modern Chinese restaurant located in K-Square Magok, offering neat Chinese cuisine, dim sum, and specialty dishes"
   },
   {
     "image": "https://picsum.photos/seed/KeatSong-banner-3/1600/640",
