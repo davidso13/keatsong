@@ -154,8 +154,8 @@ export function BannerAdminForm({ initial }: { initial: Banner[] }) {
           {saving ? "Saving…" : "Save banners"}
         </Button>
         <p className="text-xs text-ink-faint">
-          Writes <code className="font-mono">src/data/banners.json</code>. On a read-only
-          deployment, edit the file locally and redeploy.
+          Saved to the database when <code className="font-mono">DATABASE_URL</code> is set;
+          otherwise written to <code className="font-mono">src/data/banners.json</code>.
         </p>
       </div>
     </div>

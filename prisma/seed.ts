@@ -4,7 +4,7 @@ import {
   LOCAL_RESTAURANTS,
   getLocalReviews,
 } from "../src/data/schema";
-import { LOCAL_ACTIVITIES, LOCAL_PLACES } from "../src/data/content";
+import { LOCAL_ACTIVITIES, LOCAL_BANNERS, LOCAL_PLACES } from "../src/data/content";
 
 const prisma = new PrismaClient();
 
@@ -123,9 +123,21 @@ async function main() {
     });
   }
 
+  if ((await prisma.banner.count()) === 0) {
+    await prisma.banner.createMany({
+      data: LOCAL_BANNERS.map((b, order) => ({
+        image: b.image,
+        href: b.href,
+        title: b.title,
+        subtitle: b.subtitle,
+        order,
+      })),
+    });
+  }
+
   console.log(
     `✅ Done — ${LOCAL_RESTAURANTS.length} restaurants, ${LOCAL_CURATED_LISTS.length} curated lists, ` +
-      `${LOCAL_ACTIVITIES.length} activities, ${LOCAL_PLACES.length} places`,
+      `${LOCAL_ACTIVITIES.length} activities, ${LOCAL_PLACES.length} places, ${LOCAL_BANNERS.length} banners`,
   );
 }
 

@@ -241,3 +241,19 @@ model Place {
 
   @@index([createdAt])
 }
+
+// ---------------------------------------------------------------------------
+// Banners — 홈 상단 롤링 배너 (관리자가 전체 목록을 통째로 교체)
+// ---------------------------------------------------------------------------
+model Banner {
+  id        String   @id @default(cuid())
+  image     String
+  href      String
+  title     String
+  subtitle  String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
