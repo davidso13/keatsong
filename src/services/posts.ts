@@ -21,11 +21,11 @@ interface MemPost {
   comments: PostComment[];
 }
 
-const globalForPosts = globalThis as unknown as { __keatsongPosts?: MemPost[] };
+const globalForPosts = globalThis as unknown as { __KeatSongPosts?: MemPost[] };
 
 function memStore(): MemPost[] {
-  if (!globalForPosts.__keatsongPosts) {
-    globalForPosts.__keatsongPosts = postsSeed.map((p) => ({
+  if (!globalForPosts.__KeatSongPosts) {
+    globalForPosts.__KeatSongPosts = postsSeed.map((p) => ({
       id: p.id,
       nickname: p.nickname,
       title: p.title,
@@ -40,7 +40,7 @@ function memStore(): MemPost[] {
       })),
     }));
   }
-  return globalForPosts.__keatsongPosts;
+  return globalForPosts.__KeatSongPosts;
 }
 
 function byNewest<T extends { createdAt: string }>(a: T, b: T) {
