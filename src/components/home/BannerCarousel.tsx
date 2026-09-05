@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Banner } from "@/types";
 
-const ROTATE_MS = 6000;
+const ROTATE_MS = 4000;
 
 function BannerLink({
   href,
