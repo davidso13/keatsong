@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -8,22 +7,8 @@ export function Footer() {
     <footer className="px-4 pb-6 pt-16 sm:px-6">
       <div className="dot-grid relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-cobalt px-6 pt-14 text-white sm:px-12">
         <h2 className="display max-w-2xl text-3xl leading-tight sm:text-4xl">
-          Turn every trip into a great meal.
+          Korea&rsquo;s Best Bites. Welcome to the gourmet journey.
         </h2>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/restaurants"
-            className={buttonVariants({ variant: "dark", size: "md" })}
-          >
-            Explore restaurants
-          </Link>
-          <Link
-            href="/curated"
-            className="inline-flex h-10 items-center justify-center rounded-full border border-white/40 px-5 text-sm font-medium text-white transition-colors hover:bg-white/10"
-          >
-            Browse collections
-          </Link>
-        </div>
 
         <div className="mt-14 grid gap-8 border-t border-white/20 py-8 text-sm sm:grid-cols-[1.5fr_1fr_1fr]">
           <div>
@@ -34,11 +19,20 @@ export function Footer() {
           </div>
           <div className="space-y-2">
             <p className="eyebrow text-white/60">Explore</p>
+            <Link href="/" className="block text-white/85 hover:text-white">
+              Home
+            </Link>
             <Link href="/restaurants" className="block text-white/85 hover:text-white">
               Restaurants
             </Link>
-            <Link href="/curated" className="block text-white/85 hover:text-white">
-              Collections
+            <Link href="/things-to-do" className="block text-white/85 hover:text-white">
+              Things to do
+            </Link>
+            <Link href="/places" className="block text-white/85 hover:text-white">
+              Places
+            </Link>
+            <Link href="/moments" className="block text-white/85 hover:text-white">
+              Share moments
             </Link>
           </div>
           <div className="space-y-2">
